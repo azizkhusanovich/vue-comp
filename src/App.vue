@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <div class="card">
+      <p>Lorem ipsum dolor sit amet.</p>
+
       <h2>Dynamic components</h2>
       <button class="btn" :class="firstClass" @click="activeClass = 'one'">
         One
@@ -13,7 +15,7 @@
     <keep-alive>
       <component :is="move"></component>
     </keep-alive>
-    
+
     <!-- <app-card-one></app-card-one> -->
     <!-- <app-card-two></app-card-two> -->
   </div>
