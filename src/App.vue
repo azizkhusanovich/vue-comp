@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="card">
+      <h2>Dynamic components</h2>
+      <button class="btn" :class="firstClass" @click="activeClass = 'one'">
+        One
+      </button>
+      <button class="btn" :class="secondClass" @click="activeClass = 'two'">
+        Two
+      </button>
+    </div>
+
+    <keep-alive>
+      <component :is="move"></component>
+    </keep-alive>
+    
+    <!-- <app-card-one></app-card-one> -->
+    <!-- <app-card-two></app-card-two> -->
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AppCardOne from "./components/AppCardOne.vue";
+import AppCardTwo from "./components/AppCardTwo.vue";
 export default {
-  name: 'App',
+  data() {
+    return {
+      activeClass: "one", // two
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    AppCardOne,
+    AppCardTwo,
+  },
+  computed: {
+    move() {
+      return "app-card-" + this.activeClass;
+    },
+    firstClass() {
+      return this.activeClass === "one" ? "primary" : "";
+    },
+    secondClass() {
+      return this.activeClass === "two" ? "primary" : "";
+    },
+  },
+};
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style>
 </style>
